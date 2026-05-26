@@ -1,65 +1,276 @@
-import Image from "next/image";
+import Link from 'next/link';
+import ScrollReveal from '@/components/ScrollReveal';
+import Artwork from '@/components/artwork';
+import projects from '@/data/projects';
+import type { Metadata } from 'next';
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: 'The E2W Company — Empowering Diversity, Driving Innovation',
+  description: 'A multidisciplinary studio working across architecture, web, software, and marketing. Based in Boulder, Manchester, and Islamabad.',
+};
+
+const pillars = [
+  {
+    num: '01', slug: 'architecture',
+    title: 'Architecture', titleEm: '& Design',
+    tagline: 'Spaces that perform as well as they appear. From private residences to civic buildings.',
+    art: 'mountains' as const,
+    grad: 'linear-gradient(135deg, #1a1410 0%, #5a3a28 35%, #c9785a 70%, #f0c987 100%)',
+    coord: '40.0150° N',
+  },
+  {
+    num: '02', slug: 'web',
+    title: 'Web &', titleEm: 'Software',
+    tagline: 'Platforms, products, and design systems that scale. Built for performance and longevity.',
+    art: 'curves' as const,
+    grad: 'linear-gradient(135deg, #001824 0%, #00465e 30%, #006b8c 65%, #5fc8d8 100%)',
+    coord: '53.4808° N',
+  },
+  {
+    num: '03', slug: 'marketing',
+    title: 'Marketing &', titleEm: 'Advertising',
+    tagline: 'Brand strategy, identity, and campaigns that move markets and build lasting recognition.',
+    art: 'orbits' as const,
+    grad: 'linear-gradient(135deg, #07082a 0%, #1f2070 30%, #4040a0 65%, #8080d0 100%)',
+    coord: '33.7200° N',
+  },
+];
+
+const approachSteps = [
+  { step: '01', h: 'Under', em: 'stand', body: 'We start by listening — to you, your users, and the context the work will live in. Every good outcome starts with the right question.' },
+  { step: '02', h: 'De', em: 'sign', body: 'Rigorous thinking made visible. We iterate quickly, test assumptions early, and resist the safe answer in favour of the correct one.' },
+  { step: '03', h: 'Build', em: '', body: 'We do the work ourselves. No black-box subcontractors, no bait-and-switch on who actually builds what we designed together.' },
+  { step: '04', h: 'Re', em: 'fine', body: 'Shipping is not finishing. We stay close through launch and beyond, tuning the system against real-world performance data.' },
+];
+
+export default function HomePage() {
+  const counts = ['architecture', 'web', 'marketing'].map(d => projects.filter(p => p.discipline === d).length);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+      {/* 01 HERO */}
+      <section className="hero">
+        <div className="container" style={{ width: '100%' }}>
+          <div className="hero-grid">
+            <div>
+              <div className="hero-eyebrow">
+                <span className="line" />
+                <span className="num">E2W</span>
+                Boulder · Manchester · Islamabad
+              </div>
+              <h1 className="hero-title">
+                <span className="line"><span>Empowering</span></span>
+                <span className="line"><span><em>diversity,</em></span></span>
+                <span className="line"><span>driving innovation.</span></span>
+              </h1>
+              <div className="hero-meta">
+                <div className="stripe">
+                  <span><strong>Architecture</strong></span>
+                  <span><strong>Web & Software</strong></span>
+                  <span><strong>Marketing</strong></span>
+                  <span><strong>Est. 2024</strong></span>
+                </div>
+              </div>
+            </div>
+            <div className="hero-side">
+              <p>A Colorado studio engineering the built environment, digital products, and market-facing narratives for clients who want work that lasts.</p>
+              <div className="hero-actions">
+                <Link href="/work/architecture" className="btn btn-primary">View Our Work <span className="arrow">→</span></Link>
+                <Link href="/contact" className="btn btn-ghost">Start a Project</Link>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div className="scroll-indicator" aria-hidden="true">
+          <div className="bar" />
+          <span>Scroll</span>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* 02 MANIFESTO */}
+      <section className="section manifesto">
+        <div className="container">
+          <ScrollReveal>
+            <div className="section-label"><span className="num">01</span><span className="line" />Manifesto</div>
+          </ScrollReveal>
+          <div className="manifesto-grid">
+            <ScrollReveal delay={0.1}>
+              <p className="manifesto-text">
+                We believe the best work happens when <strong>design, engineering, and strategy</strong> share the same room from the start — not handed off sequentially. <em>Multidisciplinary</em> is how we are organised.
+              </p>
+            </ScrollReveal>
+            <ScrollReveal delay={0.2}>
+              <div>
+                <p style={{ color: 'var(--paper-dim)', lineHeight: 1.65, fontSize: '1rem', marginBottom: '1.5rem' }}>
+                  Founded in 2024, The E2W Company is a Colorado LLC operating across three studios on two continents. We work with founders, institutions, and scale-ups who need work that looks right on day one and performs better on year three.
+                </p>
+                <div className="manifesto-stats">
+                  {[['3','Disciplines'],['6','Projects'],['3','Continents'],["'24",'Founded']].map(([v,l]) => (
+                    <div key={l} className="stat">
+                      <div className="v">{v}<em>.</em></div>
+                      <div className="l">{l}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* 03 PILLARS */}
+      <section className="section work">
+        <div className="container">
+          <ScrollReveal>
+            <div className="section-label"><span className="num">02</span><span className="line" />What We Do</div>
+            <div className="work-head">
+              <h2 className="section-title">Three <em>pillars,</em><br/>one studio.</h2>
+              <p>Every project belongs to one of three disciplines. Distinct in practice, unified in culture.</p>
+            </div>
+          </ScrollReveal>
+          <div className="pillar-gateway-grid">
+            {pillars.map((p, i) => (
+              <Link key={p.slug} href={`/work/${p.slug}`} className="pillar-gateway reveal in" style={{ transitionDelay: `${i * 0.15}s` }}>
+                <div className="pg-art">
+                  <div className="pg-grad" style={{ background: p.grad }} />
+                  <div className="pg-svg"><Artwork name={p.art} /></div>
+                  <div className="pg-vignette" />
+                </div>
+                <div className="pg-body">
+                  <div className="pg-num">{p.num} / {p.coord}</div>
+                  <h3 className="pg-title">{p.title} <em>{p.titleEm}</em></h3>
+                  <p className="pg-tagline">{p.tagline}</p>
+                  <div className="pg-foot">
+                    <span className="pg-meta">{counts[i]} project{counts[i] !== 1 ? 's' : ''}</span>
+                    <span className="pg-arrow">Explore
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 04 APPROACH */}
+      <section className="section approach">
+        <div className="container">
+          <ScrollReveal>
+            <div className="section-label"><span className="num">03</span><span className="line" />How We Work</div>
+            <h2 className="section-title">Our <em>approach.</em></h2>
+          </ScrollReveal>
+          <div className="approach-grid">
+            {approachSteps.map((s, i) => (
+              <ScrollReveal key={s.step} delay={i * 0.1}>
+                <div className="approach-card">
+                  <div className="step">{s.step}</div>
+                  <h3>{s.h}<em>{s.em}</em></h3>
+                  <p>{s.body}</p>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 05 LOCATIONS */}
+      <section className="section locations">
+        <div className="container">
+          <ScrollReveal>
+            <div className="section-label"><span className="num">04</span><span className="line" />Where We Are</div>
+            <h2 className="section-title">Three <em>studios,</em><br/>one portfolio.</h2>
+          </ScrollReveal>
+          <div className="loc-grid" style={{ marginTop: '3rem' }}>
+            <ScrollReveal>
+              <div className="map-frame">
+                <svg viewBox="0 0 560 560" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="280" cy="280" r="260" stroke="var(--line-strong)" strokeWidth="1"/>
+                  <circle cx="280" cy="280" r="180" stroke="var(--line)" strokeWidth="0.5"/>
+                  <circle cx="280" cy="280" r="100" stroke="var(--line)" strokeWidth="0.5"/>
+                  {[
+                    { x: 112, y: 210, color: 'var(--azure)' },
+                    { x: 268, y: 162, color: 'var(--azure-bright)' },
+                    { x: 358, y: 200, color: 'var(--amber)' },
+                  ].map(({ x, y, color }, i) => (
+                    <g key={i} transform={`translate(${x} ${y})`}>
+                      <circle className="ring" r="10" stroke={color} strokeWidth="1" fill="none"/>
+                      <circle className="ring ring-2" r="10" stroke={color} strokeWidth="1" fill="none"/>
+                      <circle r="4" fill={color}/>
+                    </g>
+                  ))}
+                  <line x1="112" y1="210" x2="268" y2="162" stroke="var(--line)" strokeWidth="0.5" strokeDasharray="3 3"/>
+                  <line x1="268" y1="162" x2="358" y2="200" stroke="var(--line)" strokeWidth="0.5" strokeDasharray="3 3"/>
+                </svg>
+              </div>
+            </ScrollReveal>
+            <div className="loc-list">
+              {[
+                { city: 'Boulder', role: 'Headquarters', addr: '1942 Broadway St., STE 314C\nBoulder, Colorado 80302', meta: 'GMT−7 · +1 (719) 301-0359' },
+                { city: 'Manchester', role: 'Studio', addr: 'Manchester, United Kingdom', meta: 'GMT+0 · hello@e2w.company' },
+                { city: 'Islamabad', role: 'Studio', addr: '4th Floor, Bunyad Plaza\n95 Bahria Paradise, Phase 4', meta: 'GMT+5 · +92 347 6133664' },
+              ].map((loc, i) => (
+                <ScrollReveal key={loc.city} delay={i * 0.1}>
+                  <div className="loc-item">
+                    <div className="dot" />
+                    <div className="body">
+                      <div className="city">{loc.city}</div>
+                      <div className="role">{loc.role}</div>
+                      <div className="addr" style={{ whiteSpace: 'pre-line' }}>{loc.addr}</div>
+                      <div className="meta">{loc.meta}</div>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* MARQUEE */}
+      <section className="section values">
+        <div className="marquee-wrap">
+          <div className="value-marquee" aria-hidden="true">
+            {['Empowering','Diversity','Driving','Innovation','Architecture','Web','Marketing','Empowering','Diversity','Driving','Innovation','Architecture','Web','Marketing'].map((v, i) => (
+              <span key={i} className="value-item">
+                {i % 3 === 0 ? <em>{v}</em> : v}
+                <span className="dot" />
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 06 CONTACT CTA */}
+      <section className="section contact">
+        <div className="container">
+          <div className="contact-grid">
+            <ScrollReveal>
+              <div className="section-label"><span className="num">06</span><span className="line" />Get In Touch</div>
+              <h2 className="contact-title">Let&apos;s build<br/><em>something.</em></h2>
+              <div className="contact-meta">
+                {[
+                  ['General','hello@e2w.company','mailto:hello@e2w.company'],
+                  ['New Business','projects@e2w.company','mailto:projects@e2w.company'],
+                  ['US Phone','+1 (719) 301-0359','tel:+17193010359'],
+                  ['PK Phone','+92 347 6133664','tel:+923476133664'],
+                ].map(([k,v,href]) => (
+                  <div key={k} className="row">
+                    <span className="k">{k}</span>
+                    <span className="v"><a href={href}>{v}</a></span>
+                  </div>
+                ))}
+              </div>
+            </ScrollReveal>
+            <ScrollReveal delay={0.15}>
+              <p style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.3rem, 2.2vw, 1.75rem)', lineHeight: 1.35, color: 'var(--paper-dim)', marginBottom: '2.5rem' }}>
+                We reply within one business day. Tell us what you&apos;re building and we&apos;ll tell you if we&apos;re the right fit.
+              </p>
+              <Link href="/contact" className="btn btn-primary">Start a Project <span className="arrow">→</span></Link>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
