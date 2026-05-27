@@ -62,29 +62,11 @@
 }
 [data-theme='light'] .pg-foot { border-top-color: var(--line-strong); }
 
-/* ── Work / project cards (pillar pages, homepage recent work) ── */
+/* ── Work / project cards — art fills the full card, overlay text is always
+   light-coloured because it sits over the dark artwork gradient ── */
 [data-theme='light'] .work-card {
-  background: var(--frost);
-  box-shadow: 0 2px 20px rgba(20,24,33,0.07);
+  box-shadow: 0 4px 24px rgba(20,24,33,0.1);
 }
-[data-theme='light'] .work-card-body {
-  background: var(--frost);
-}
-[data-theme='light'] .work-card-body .arrow {
-  background: rgba(220,215,205,0.8);
-  border-color: var(--line-strong);
-}
-[data-theme='light'] .work-card:hover .work-card-body .arrow {
-  background: var(--paper);
-  border-color: var(--paper);
-}
-/* Tag / status badges that sit over the artwork image */
-[data-theme='light'] .work-card-art .tag {
-  background: rgba(250,247,240,0.75);
-  border-color: rgba(20,24,33,0.18);
-  color: var(--paper);
-}
-[data-theme='light'] .work-card-art .status { color: var(--paper); }
 
 /* ── Approach cards ── */
 [data-theme='light'] .approach-card {
@@ -748,31 +730,31 @@ section.section {
 /* ===== APPROACH ===== */
 .approach { border-top: 1px solid var(--line); }
 .approach-grid {
-  display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 4rem;
+  display: grid; grid-template-columns: 1fr; gap: 1.25rem; margin-top: 4rem;
 }
-@media (min-width: 720px) { .approach-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; } }
-@media (min-width: 1100px) { .approach-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 720px)  { .approach-grid { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; } }
+@media (min-width: 1100px) { .approach-grid { grid-template-columns: repeat(4, 1fr); gap: 1.25rem; } }
 .approach-card {
-  padding: 2rem;
+  padding: 2rem 1.75rem 2rem;
   border: 1px solid var(--line);
-  background: linear-gradient(180deg, rgba(26, 34, 56, 0.4), rgba(15, 23, 41, 0.2));
-  border-radius: 4px;
+  background: linear-gradient(160deg, rgba(26,34,56,0.5) 0%, rgba(15,23,41,0.25) 100%);
+  border-radius: 6px;
   position: relative;
-  transition: transform 0.5s var(--ease-out), border-color 0.5s var(--ease-out);
-  min-height: 280px;
-  display: flex; flex-direction: column;
+  transition: transform 0.5s var(--ease-out), border-color 0.5s var(--ease-out), background 0.5s var(--ease-out);
+  min-height: 300px;
+  display: flex; flex-direction: column; gap: 0;
 }
-.approach-card:hover { transform: translateY(-6px); border-color: var(--azure); }
+.approach-card:hover { transform: translateY(-6px); border-color: var(--azure); background: linear-gradient(160deg, rgba(26,34,56,0.7) 0%, rgba(15,23,41,0.45) 100%); }
 .approach-card .step {
-  font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.16em;
-  text-transform: uppercase; color: var(--azure); margin-bottom: 2.5rem;
+  font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--azure); margin-bottom: 1.75rem;
 }
 .approach-card h3 {
-  font-family: var(--font-display); font-weight: 400; font-size: 1.85rem;
-  line-height: 1.05; letter-spacing: -0.01em; margin-bottom: 1rem;
+  font-family: var(--font-display); font-weight: 400; font-size: clamp(1.55rem, 2.2vw, 1.9rem);
+  line-height: 1.05; letter-spacing: -0.01em; margin-bottom: 1.25rem;
 }
 .approach-card h3 em { font-style: italic; color: var(--azure-bright); }
-.approach-card p { font-size: 0.95rem; line-height: 1.55; color: var(--paper-dim); margin-top: auto; }
+.approach-card p { font-size: 0.93rem; line-height: 1.6; color: var(--paper-dim); margin-top: auto; }
 
 /* ===== LOCATIONS ===== */
 .locations { border-top: 1px solid var(--line); }
@@ -959,21 +941,68 @@ footer { border-top: 1px solid var(--line); padding: 4rem 0 2rem; position: rela
 .work-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
 @media (min-width: 720px) { .work-grid { grid-template-columns: 1fr 1fr; gap: 1.75rem; } }
 @media (min-width: 1100px) { .work-grid { grid-template-columns: repeat(3, 1fr); gap: 1.75rem; } }
-.work-card { position: relative; display: block; text-decoration: none; color: inherit; overflow: hidden; border-radius: 6px; background: var(--midnight); transition: transform 0.6s var(--ease-out), opacity 0.4s var(--ease-out); opacity: 0; transform: translateY(20px); }
+/* Work card — text overlaid at bottom of artwork (no split body panel) */
+.work-card {
+  position: relative; display: block; text-decoration: none; color: inherit;
+  overflow: hidden; border-radius: 6px; background: var(--midnight);
+  aspect-ratio: 3 / 4;
+  transition: transform 0.6s var(--ease-out), opacity 0.4s var(--ease-out);
+  opacity: 0; transform: translateY(20px);
+}
 .work-card.in { opacity: 1; transform: translateY(0); }
-.work-card-art { position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-bottom: 1px solid var(--line); }
-.work-card-art .grad { position: absolute; inset: 0; transition: transform 1.2s var(--ease-out); }
-.work-card:hover .work-card-art .grad { transform: scale(1.05); }
+.work-card:hover { transform: translateY(-5px); }
+
+/* Art layer fills the full card */
+.work-card-art { position: absolute; inset: 0; }
+.work-card-art .grad { position: absolute; inset: 0; transition: transform 1.4s var(--ease-out); }
+.work-card:hover .work-card-art .grad { transform: scale(1.06); }
 .work-card-art .art-svg { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.85; transition: opacity 0.6s var(--ease-out); }
 .work-card:hover .work-card-art .art-svg { opacity: 1; }
-.work-card-art .tag { position: absolute; top: 1rem; left: 1rem; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--paper); padding: 0.4rem 0.7rem; background: rgba(7, 9, 15, 0.55); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-radius: 999px; border: 1px solid rgba(243, 238, 228, 0.16); }
-.work-card-art .status { position: absolute; top: 1rem; right: 1rem; font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--paper); display: flex; align-items: center; gap: 0.4rem; }
-.work-card-art .status .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--paper); box-shadow: 0 0 8px currentColor; }
-.work-card-body { padding: 1.5rem 1.25rem 1.25rem; background: linear-gradient(180deg, rgba(15, 23, 41, 0.5), rgba(7, 9, 15, 0.7)); display: flex; flex-direction: column; gap: 0.4rem; }
-.work-card-body .title { font-family: var(--font-display); font-size: 1.65rem; line-height: 1.05; letter-spacing: -0.01em; color: var(--paper); }
-.work-card-body .meta { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.06em; color: var(--paper-mute); display: flex; gap: 1rem; }
-.work-card-body .arrow { position: absolute; bottom: 1.25rem; right: 1.25rem; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--line-strong); display: flex; align-items: center; justify-content: center; background: rgba(7, 9, 15, 0.6); transition: all 0.4s var(--ease-out); }
-.work-card:hover .work-card-body .arrow { background: var(--paper); color: var(--ink); border-color: var(--paper); transform: rotate(-45deg); }
+
+/* Discipline tag — top left */
+.work-card-art .tag {
+  position: absolute; top: 1rem; left: 1rem;
+  font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(243,238,228,0.9); padding: 0.35rem 0.65rem;
+  background: rgba(7,9,15,0.55); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  border-radius: 999px; border: 1px solid rgba(243,238,228,0.16);
+}
+/* Status badge — top right */
+.work-card-art .status {
+  position: absolute; top: 1rem; right: 1rem;
+  font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(243,238,228,0.9); display: flex; align-items: center; gap: 0.4rem;
+}
+.work-card-art .status .dot { width: 5px; height: 5px; border-radius: 50%; }
+
+/* Text body overlaid at bottom with a gradient vignette */
+.work-card-body {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 3.5rem 1.4rem 1.4rem;
+  background: linear-gradient(to bottom, transparent 0%, rgba(7,9,15,0.75) 40%, rgba(7,9,15,0.95) 100%);
+  display: flex; flex-direction: column; gap: 0.3rem;
+}
+.work-card-body .title {
+  font-family: var(--font-display); font-size: clamp(1.4rem, 2.2vw, 1.75rem);
+  line-height: 1.05; letter-spacing: -0.01em; color: #f3eee4;
+}
+.work-card-body .meta {
+  font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.06em;
+  color: rgba(217,211,197,0.65); display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.2rem;
+}
+.work-card-body .arrow {
+  position: absolute; bottom: 1.25rem; right: 1.25rem;
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 1px solid rgba(243,238,228,0.25);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(243,238,228,0.8);
+  background: rgba(7,9,15,0.4);
+  transition: all 0.4s var(--ease-out);
+}
+.work-card:hover .work-card-body .arrow {
+  background: #f3eee4; color: #07090f;
+  border-color: #f3eee4; transform: rotate(-45deg);
+}
 
 /* ===== PROJECT PAGE ===== */
 .project-hero { position: relative; min-height: 95vh; margin-top: 0; padding-top: 6rem; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; }

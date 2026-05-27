@@ -3,6 +3,7 @@ import ScrollReveal from '@/components/ScrollReveal';
 import Artwork from '@/components/artwork';
 import NetworkCanvasWrapper from '@/components/NetworkCanvasWrapper';
 import LocationsMap from '@/components/LocationsMap';
+import ServicesAccordion from '@/components/ServicesAccordion';
 import projects from '@/data/projects';
 import type { Metadata } from 'next';
 
@@ -39,10 +40,22 @@ const pillars = [
 ];
 
 const approachSteps = [
-  { step: '01', h: 'Under', em: 'stand', body: 'We start by listening — to you, your users, and the context the work will live in. Every good outcome starts with the right question.' },
-  { step: '02', h: 'De', em: 'sign', body: 'Rigorous thinking made visible. We iterate quickly, test assumptions early, and resist the safe answer in favour of the correct one.' },
-  { step: '03', h: 'Build', em: '', body: 'We do the work ourselves. No black-box subcontractors, no bait-and-switch on who actually builds what we designed together.' },
-  { step: '04', h: 'Re', em: 'fine', body: 'Shipping is not finishing. We stay close through launch and beyond, tuning the system against real-world performance data.' },
+  {
+    step: '01', title: 'Listen,', em: 'carefully.',
+    body: 'Every engagement begins with a discovery sprint. We learn the business, the constraints, the politics, the personalities. Then we challenge the brief.',
+  },
+  {
+    step: '02', title: 'Frame the', em: 'question.',
+    body: 'Most projects fail because the wrong question got answered well. We spend disproportionate time framing — strategy, scope, success criteria — before any pixels move.',
+  },
+  {
+    step: '03', title: 'Make,', em: 'iterate.',
+    body: 'Short cycles, transparent progress, real conversation. You see work weekly, not at three big reveals. Course corrections happen cheaply, before they cost you anything.',
+  },
+  {
+    step: '04', title: 'Ship,', em: 'support.',
+    body: 'Launch is the start, not the end. We stay involved — measuring, refining, building the next thing. Most clients become long-term partners. That is the goal.',
+  },
 ];
 
 export default function HomePage() {
@@ -122,7 +135,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 03 PILLARS */}
+      {/* 02 PILLAR GATEWAYS */}
       <section className="section work">
         <div className="container">
           <ScrollReveal>
@@ -157,19 +170,24 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* 03 SERVICES ACCORDION */}
+      <ServicesAccordion />
+
       {/* 04 APPROACH */}
       <section className="section approach">
         <div className="container">
           <ScrollReveal>
-            <div className="section-label"><span className="num">03</span><span className="line" />How We Work</div>
-            <h2 className="section-title">Our <em>approach.</em></h2>
+            <div className="section-label"><span className="num">04</span><span className="line" />How We Work</div>
+            <h2 className="section-title" style={{ fontSize: 'clamp(2.5rem, 7vw, 6rem)', marginBottom: '3rem' }}>
+              How we <em>actually</em> work.
+            </h2>
           </ScrollReveal>
           <div className="approach-grid">
             {approachSteps.map((s, i) => (
-              <ScrollReveal key={s.step} delay={i * 0.1}>
+              <ScrollReveal key={s.step} delay={i * 0.08}>
                 <div className="approach-card">
-                  <div className="step">{s.step}</div>
-                  <h3>{s.h}<em>{s.em}</em></h3>
+                  <div className="step">STEP {s.step}</div>
+                  <h3>{s.title} <em>{s.em}</em></h3>
                   <p>{s.body}</p>
                 </div>
               </ScrollReveal>
