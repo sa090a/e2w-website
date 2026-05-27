@@ -2,6 +2,7 @@ import Link from 'next/link';
 import ScrollReveal from '@/components/ScrollReveal';
 import Artwork from '@/components/artwork';
 import NetworkCanvasWrapper from '@/components/NetworkCanvasWrapper';
+import LocationsMap from '@/components/LocationsMap';
 import projects from '@/data/projects';
 import type { Metadata } from 'next';
 
@@ -181,52 +182,10 @@ export default function HomePage() {
       <section className="section locations">
         <div className="container">
           <ScrollReveal>
-            <div className="section-label"><span className="num">04</span><span className="line" />Where We Are</div>
-            <h2 className="section-title">Three <em>studios,</em><br/>one portfolio.</h2>
+            <div className="section-label"><span className="num">05</span><span className="line" />Where We Are</div>
+            <h2 className="section-title">Three studios.<br/>Three <em>time zones.</em></h2>
           </ScrollReveal>
-          <div className="loc-grid" style={{ marginTop: '3rem' }}>
-            <ScrollReveal>
-              <div className="map-frame">
-                <svg viewBox="0 0 560 560" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="280" cy="280" r="260" stroke="var(--line-strong)" strokeWidth="1"/>
-                  <circle cx="280" cy="280" r="180" stroke="var(--line)" strokeWidth="0.5"/>
-                  <circle cx="280" cy="280" r="100" stroke="var(--line)" strokeWidth="0.5"/>
-                  {[
-                    { x: 112, y: 210, color: 'var(--azure)' },
-                    { x: 268, y: 162, color: 'var(--azure-bright)' },
-                    { x: 358, y: 200, color: 'var(--amber)' },
-                  ].map(({ x, y, color }, i) => (
-                    <g key={i} transform={`translate(${x} ${y})`}>
-                      <circle className="ring" r="10" stroke={color} strokeWidth="1" fill="none"/>
-                      <circle className="ring ring-2" r="10" stroke={color} strokeWidth="1" fill="none"/>
-                      <circle r="4" fill={color}/>
-                    </g>
-                  ))}
-                  <line x1="112" y1="210" x2="268" y2="162" stroke="var(--line)" strokeWidth="0.5" strokeDasharray="3 3"/>
-                  <line x1="268" y1="162" x2="358" y2="200" stroke="var(--line)" strokeWidth="0.5" strokeDasharray="3 3"/>
-                </svg>
-              </div>
-            </ScrollReveal>
-            <div className="loc-list">
-              {[
-                { city: 'Boulder', role: 'Headquarters', addr: '1942 Broadway St., STE 314C\nBoulder, Colorado 80302', meta: 'GMT−7 · +1 (719) 301-0359' },
-                { city: 'Manchester', role: 'Studio', addr: 'Manchester, United Kingdom', meta: 'GMT+0 · hello@e2w.company' },
-                { city: 'Islamabad', role: 'Studio', addr: '4th Floor, Bunyad Plaza\n95 Bahria Paradise, Phase 4', meta: 'GMT+5 · +92 347 6133664' },
-              ].map((loc, i) => (
-                <ScrollReveal key={loc.city} delay={i * 0.1}>
-                  <div className="loc-item">
-                    <div className="dot" />
-                    <div className="body">
-                      <div className="city">{loc.city}</div>
-                      <div className="role">{loc.role}</div>
-                      <div className="addr" style={{ whiteSpace: 'pre-line' }}>{loc.addr}</div>
-                      <div className="meta">{loc.meta}</div>
-                    </div>
-                  </div>
-                </ScrollReveal>
-              ))}
-            </div>
-          </div>
+          <LocationsMap />
         </div>
       </section>
 

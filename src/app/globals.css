@@ -41,40 +41,116 @@
   --line-strong: rgba(20, 24, 33, 0.18);
 }
 
-/* ===== LIGHT MODE — card body overrides ===== */
-/* The artwork gradient images stay dark (they're decorative photos).
-   The info panel below the image must flip to a light surface. */
+/* ============================================================
+   LIGHT MODE — comprehensive overrides for every surface that
+   uses hardcoded dark rgba values.
+   Artwork gradient images stay as-is (decorative).
+   All info panels, overlays, badges, and buttons flip light.
+   ============================================================ */
+
+/* ── Homepage pillar gateway cards ── */
+[data-theme='light'] .pillar-gateway {
+  background: var(--frost);
+  box-shadow: 0 2px 20px rgba(20,24,33,0.07);
+}
 [data-theme='light'] .pg-body {
   background: var(--frost);
   border-top: 1px solid var(--line-strong);
 }
 [data-theme='light'] .pg-vignette {
-  background: linear-gradient(180deg, transparent 50%, rgba(240, 235, 225, 0.55) 100%);
+  background: linear-gradient(180deg, transparent 50%, rgba(220,215,205,0.6) 100%);
 }
-[data-theme='light'] .pillar-gateway {
-  background: var(--frost);
-  box-shadow: 0 2px 16px rgba(20, 24, 33, 0.07);
-}
-[data-theme='light'] .pg-foot {
-  border-top-color: var(--line-strong);
-}
-/* work cards */
+[data-theme='light'] .pg-foot { border-top-color: var(--line-strong); }
+
+/* ── Work / project cards (pillar pages, homepage recent work) ── */
 [data-theme='light'] .work-card {
   background: var(--frost);
-  box-shadow: 0 2px 16px rgba(20, 24, 33, 0.07);
+  box-shadow: 0 2px 20px rgba(20,24,33,0.07);
 }
 [data-theme='light'] .work-card-body {
   background: var(--frost);
 }
-/* other pillar cards on pillar pages */
+[data-theme='light'] .work-card-body .arrow {
+  background: rgba(220,215,205,0.8);
+  border-color: var(--line-strong);
+}
+[data-theme='light'] .work-card:hover .work-card-body .arrow {
+  background: var(--paper);
+  border-color: var(--paper);
+}
+/* Tag / status badges that sit over the artwork image */
+[data-theme='light'] .work-card-art .tag {
+  background: rgba(250,247,240,0.75);
+  border-color: rgba(20,24,33,0.18);
+  color: var(--paper);
+}
+[data-theme='light'] .work-card-art .status { color: var(--paper); }
+
+/* ── Approach cards ── */
+[data-theme='light'] .approach-card {
+  background: var(--frost);
+  border-color: var(--line-strong);
+}
+
+/* ── Other pillar link cards (pillar pages) ── */
 [data-theme='light'] .other-pillar-card {
   background: var(--frost);
   border-color: var(--line-strong);
 }
-/* approach cards */
-[data-theme='light'] .approach-card {
+
+/* ── Project metric highlight box ── */
+[data-theme='light'] .project-metric {
+  background: var(--frost);
+}
+
+/* ── Next-project card vignette ── */
+[data-theme='light'] .next-card .vignette {
+  background: linear-gradient(180deg, rgba(220,215,205,0.15), rgba(180,175,165,0.55));
+}
+
+/* ── Featured article (insights listing) ── */
+[data-theme='light'] .featured-article {
+  background: var(--frost);
+}
+[data-theme='light'] .featured-art .vignette {
+  background: linear-gradient(180deg, transparent 50%, rgba(220,215,205,0.5));
+}
+
+/* ── Insight grid cards ── */
+[data-theme='light'] .insight-card {
+  background: var(--frost);
+}
+[data-theme='light'] .insight-card-art .vignette {
+  background: linear-gradient(180deg, transparent 60%, rgba(220,215,205,0.5));
+}
+[data-theme='light'] .insight-card-art .cat {
+  background: rgba(250,247,240,0.75);
+  border-color: rgba(20,24,33,0.18);
+  color: var(--paper);
+}
+
+/* ── Contact page form panel ── */
+[data-theme='light'] .contact-page-form {
   background: var(--frost);
   border-color: var(--line-strong);
+}
+
+/* ── Nav scrolled state ── */
+[data-theme='light'] nav.nav.scrolled {
+  background: rgba(250,247,240,0.85);
+  border-bottom-color: var(--line-strong);
+}
+
+/* ── Mobile menu ── */
+[data-theme='light'] .mobile-menu {
+  background: var(--ink);
+}
+
+/* ── Map dots pattern adapts to light bg ── */
+[data-theme='light'] .map-frame svg circle[fill="rgba(217,211,197,0.35)"],
+[data-theme='light'] .map-frame svg path[stroke="rgba(217,211,197,0.18)"] {
+  fill: rgba(60,72,100,0.2);
+  stroke: rgba(60,72,100,0.12);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
