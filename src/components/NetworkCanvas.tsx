@@ -9,9 +9,9 @@ interface Node {
   vy: number;
 }
 
-const NODE_COUNT = 40;         // down from 70  → 780 pairs vs 2,415
+const NODE_COUNT = 40;
 const MAX_DIST = 150;
-const MAX_DIST_SQ = MAX_DIST * MAX_DIST;  // compare dist² — skip sqrt until needed
+const MAX_DIST_SQ = MAX_DIST * MAX_DIST;
 const ATTRACTION = 0.00012;
 
 export default function NetworkCanvas() {
@@ -20,7 +20,6 @@ export default function NetworkCanvas() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const ctx = canvas.getContext('2d');
@@ -30,7 +29,6 @@ export default function NetworkCanvas() {
     let mouseX = -9999;
     let mouseY = -9999;
     let isVisible = true;
-    // cache color so we don't read the DOM every frame
     let colorCache = '107, 158, 255';
 
     const getColor = () => {
@@ -39,18 +37,25 @@ export default function NetworkCanvas() {
     };
     getColor();
 
-    // Update color when theme changes
     const themeObserver = new MutationObserver(getColor);
     themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
+    // Size canvas to its container (the hero section), not the full window
     const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const parent = canvas.parentElement;
+      if (!parent) return;
+      canvas.width = parent.offsetWidth;
+      canvas.height = parent.offsetHeight;
     };
     resize();
     window.addEventListener('resize', resize, { passive: true });
 
-    const onMouse = (e: MouseEvent) => { mouseX = e.clientX; mouseY = e.clientY; };
+    // Track mouse relative to the canvas container
+    const onMouse = (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      mouseX = e.clientX - rect.left;
+      mouseY = e.clientY - rect.top;
+    };
     const onMouseLeave = () => { mouseX = -9999; mouseY = -9999; };
     window.addEventListener('mousemove', onMouse, { passive: true });
     window.addEventListener('mouseleave', onMouseLeave, { passive: true });
@@ -62,6 +67,7 @@ export default function NetworkCanvas() {
       vy: (Math.random() - 0.5) * 0.35,
     }));
 
+    // Pause rendering when hero scrolls off-screen — saves CPU/GPU entirely
     const visObserver = new IntersectionObserver(([e]) => { isVisible = e.isIntersecting; }, { threshold: 0 });
     visObserver.observe(canvas);
 
@@ -71,35 +77,30 @@ export default function NetworkCanvas() {
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Update positions
       for (const n of nodes) {
         const dx = mouseX - n.x;
         const dy = mouseY - n.y;
-        const dSq = dx * dx + dy * dy;
-        if (dSq < 90000) { // 300² — skip sqrt
+        if (dx * dx + dy * dy < 90000) {
           n.vx += dx * ATTRACTION;
           n.vy += dy * ATTRACTION;
         }
         n.vx *= 0.995; n.vy *= 0.995;
         n.x += n.vx; n.y += n.vy;
-        if (n.x < 0)             { n.x = 0;            n.vx *= -1; }
-        if (n.x > canvas.width)  { n.x = canvas.width; n.vx *= -1; }
-        if (n.y < 0)             { n.y = 0;            n.vy *= -1; }
-        if (n.y > canvas.height) { n.y = canvas.height; n.vy *= -1; }
+        if (n.x < 0)            { n.x = 0;            n.vx *= -1; }
+        if (n.x > canvas.width) { n.x = canvas.width; n.vx *= -1; }
+        if (n.y < 0)            { n.y = 0;            n.vy *= -1; }
+        if (n.y > canvas.height){ n.y = canvas.height; n.vy *= -1; }
       }
 
-      // Draw edges — batch all into ONE beginPath, vary alpha via globalAlpha
       ctx.strokeStyle = `rgb(${colorCache})`;
       ctx.lineWidth = 0.6;
-
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
           const dx = nodes[i].x - nodes[j].x;
           const dy = nodes[i].y - nodes[j].y;
           const distSq = dx * dx + dy * dy;
           if (distSq < MAX_DIST_SQ) {
-            const alpha = (1 - Math.sqrt(distSq) / MAX_DIST) * 0.4;
-            ctx.globalAlpha = alpha;
+            ctx.globalAlpha = (1 - Math.sqrt(distSq) / MAX_DIST) * 0.4;
             ctx.beginPath();
             ctx.moveTo(nodes[i].x, nodes[i].y);
             ctx.lineTo(nodes[j].x, nodes[j].y);
@@ -108,7 +109,6 @@ export default function NetworkCanvas() {
         }
       }
 
-      // Draw dots — single pass, single globalAlpha
       ctx.globalAlpha = 0.55;
       ctx.fillStyle = `rgb(${colorCache})`;
       for (const n of nodes) {

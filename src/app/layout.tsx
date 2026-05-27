@@ -3,7 +3,6 @@ import { ThemeProvider } from 'next-themes';
 import { Instrument_Serif, Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
-import NetworkCanvasWrapper from '@/components/NetworkCanvasWrapper';
 import './globals.css';
 
 const instrumentSerif = Instrument_Serif({
@@ -69,7 +68,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <ThemeProvider attribute="data-theme" defaultTheme="dark" enableSystem={false}>
-          <NetworkCanvasWrapper />
           <div className="grid-lines" aria-hidden="true" />
           <div className="shell">
             <Nav />

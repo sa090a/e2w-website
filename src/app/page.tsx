@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import ScrollReveal from '@/components/ScrollReveal';
 import Artwork from '@/components/artwork';
+import NetworkCanvasWrapper from '@/components/NetworkCanvasWrapper';
 import projects from '@/data/projects';
 import type { Metadata } from 'next';
 
@@ -50,6 +51,8 @@ export default function HomePage() {
     <>
       {/* 01 HERO */}
       <section className="hero">
+        {/* Canvas is scoped to the hero — stops rendering as soon as you scroll past */}
+        <div className="hero-canvas-wrap"><NetworkCanvasWrapper /></div>
         <div className="container" style={{ width: '100%' }}>
           <div className="hero-grid">
             <div>
