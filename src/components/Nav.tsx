@@ -57,7 +57,7 @@ export default function Nav() {
                 <LogoMark size={32} />
               </span>
               <span className="word">
-                e2<em>w</em>.
+                The E2W Company
               </span>
             </Link>
 

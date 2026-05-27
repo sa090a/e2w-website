@@ -178,23 +178,7 @@ img, svg { display: block; max-width: 100%; }
 
 .no-transition-on-load * { transition: none !important; }
 
-/* ===== CANVAS BACKGROUND ===== */
-/* Canvas lives inside .hero-canvas-wrap — scoped to hero section only */
-.hero-canvas-wrap {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 2;
-}
-.network-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  opacity: 0.7;
-}
+/* Canvas removed — was causing performance issues on lower-end devices */
 
 /* ===== LAYOUT ===== */
 .shell { position: relative; z-index: 10; }
