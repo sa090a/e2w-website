@@ -22,13 +22,38 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 }
 
 function parseInline(text: string): React.ReactNode {
-  const parts = text.split(/(\*\*[^*]+\*\*|\*[^*]+\*|`[^`]+`)/g);
+  const parts = text.split(/(\*\*[^*]+\*\*|\*[^*]+\*|`[^`]+`|\[\^\d+\])/g);
   return parts.map((part, i) => {
     if (part.startsWith('**') && part.endsWith('**')) return <strong key={i}>{part.slice(2, -2)}</strong>;
     if (part.startsWith('*') && part.endsWith('*')) return <em key={i}>{part.slice(1, -1)}</em>;
     if (part.startsWith('`') && part.endsWith('`')) return <code key={i} style={{ fontFamily: 'var(--font-mono)', fontSize: '0.9em', background: 'rgba(107,158,255,0.12)', padding: '0.1em 0.35em', borderRadius: 3 }}>{part.slice(1, -1)}</code>;
+    // Footnote citation marker [^n] -> a superscript link to the Sources list.
+    const fn = /^\[\^(\d+)\]$/.exec(part);
+    if (fn) {
+      const n = fn[1];
+      return (
+        <sup key={i} style={{ fontSize: '0.7em', lineHeight: 0 }}>
+          <a id={`ref-${n}`} href={`#fn-${n}`} style={{ color: 'var(--azure)', textDecoration: 'none' }}>{n}</a>
+        </sup>
+      );
+    }
     return part;
   });
+}
+
+// Render a footnote's text, turning the trailing source URL into a link.
+function renderFootnote(text: string): React.ReactNode {
+  const m = /^(.*?)(https?:\/\/\S+)\s*$/.exec(text);
+  if (!m) return text;
+  const [, label, url] = m;
+  return (
+    <>
+      {label}
+      <a href={url} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--azure)', wordBreak: 'break-word' }}>
+        {url.replace(/^https?:\/\//, '')}
+      </a>
+    </>
+  );
 }
 
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -79,6 +104,9 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         <div className="container">
           <div style={{ maxWidth: '70ch', margin: '0 auto' }}>
             {article.sections.map((s, i) => {
+              // Footnotes are reference apparatus — they render in the Sources
+              // list below, not inline in the article body.
+              if (s.kind === 'footnote') return null;
               if (s.kind === 'h2') return (
                 <ScrollReveal key={i}>
                   <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: 'clamp(1.6rem, 2.8vw, 2.2rem)', lineHeight: 1.1, letterSpacing: '-0.01em', color: 'var(--paper)', margin: '3.5rem 0 1.25rem' }}>{s.text}</h2>
@@ -104,6 +132,21 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                 </ScrollReveal>
               );
             })}
+
+            {article.sections.some(s => s.kind === 'footnote') && (
+              <ScrollReveal>
+                <section style={{ marginTop: '4rem', paddingTop: '2rem', borderTop: '1px solid var(--line)' }}>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.78rem', letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--paper-mute)', marginBottom: '1.5rem' }}>Sources</div>
+                  <ol style={{ margin: 0, paddingLeft: '1.5rem', display: 'grid', gap: '0.75rem' }}>
+                    {article.sections.filter(s => s.kind === 'footnote').map((s, i) => (
+                      <li key={i} id={`fn-${i + 1}`} style={{ fontFamily: 'var(--font-display)', fontSize: '0.95rem', lineHeight: 1.55, color: 'var(--paper-mute)' }}>
+                        {renderFootnote(s.text)}
+                      </li>
+                    ))}
+                  </ol>
+                </section>
+              </ScrollReveal>
+            )}
           </div>
         </div>
       </article>
