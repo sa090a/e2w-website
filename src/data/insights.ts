@@ -2,6 +2,83 @@ import { Insight } from '@/lib/types';
 
 const insights: Insight[] = [
   {
+    slug: 'cheapest-part-of-a-legacy-system',
+    title: 'The cheapest part of a legacy system is the maintenance bill',
+    tagline: 'On the costs that never appear on the invoice.',
+    category: 'Engineering',
+    readTime: '2 min read',
+    publishedAt: '2026-06-14',
+    publishedLabel: 'June 2026',
+    author: 'Shamain Anjum',
+    authorTitle: 'CTO, The E2W Company',
+    grad: 'linear-gradient(135deg, #001824 0%, #003855 30%, #006b8c 65%, #5fc8d8 100%)',
+    art: 'grid',
+    featured: false,
+    excerpt: `The maintenance contract is the cheapest thing a legacy system will ever cost you. The invoice is visible, predictable, and small relative to the bill you cannot see. We tell clients that the price of an old system is not what it takes to keep it running.`,
+    sections: [
+      {
+        kind: 'p',
+        text: `The maintenance contract is the cheapest thing a legacy system will ever cost you. The invoice is visible, predictable, and small relative to the bill you cannot see. We tell clients that the price of an old system is not what it takes to keep it running. It is what keeping it running quietly prevents.`,
+      },
+      {
+        kind: 'p',
+        text: `Call this *displacement*: the new work that never happens because the budget, the people, and the risk tolerance are all committed to standing still. Displacement does not arrive as a line item. That is exactly why it grows.`,
+      },
+      {
+        kind: 'h2',
+        text: `What the budget actually buys`,
+      },
+      {
+        kind: 'p',
+        text: `The pattern is easiest to see at scale. Each year the U.S. federal government spends more than $100 billion on IT and cyber-related investments, and agencies have typically reported spending about 80 percent of it on operations and maintenance of existing systems.[^1] In a single recent year, 26 agencies planned to spend about $74 billion to operate and maintain existing systems and only $21 billion on new development and modernization.[^2] Most organisations are far smaller, but the ratio rhymes. The default state of an IT budget is to spend most of itself keeping yesterday alive.`,
+      },
+      {
+        kind: 'h2',
+        text: `Three places the cost hides`,
+      },
+      {
+        kind: 'p',
+        text: `In our experience the hidden cost collects in three places. The first is **displacement** — every dollar and every engineer committed to the old system is a dollar and an engineer not building the next one. The second is **brittleness** — a system no one fully understands gets changed slowly and carefully, so every release becomes a negotiation with the past. The third is **the exit of knowledge** — the people who understood the system retire, and what they knew leaves with them.`,
+      },
+      {
+        kind: 'p',
+        text: `Age compounds all three. When GAO examined the ten federal legacy systems most in need of modernization, they ranged from about 8 to 51 years old and collectively cost about $337 million annually to operate and maintain.[^3] Age is not only expensive; it is exposed. One agency's critical legacy system was operating with 168 reported vulnerabilities considered high or critical risk to its network as of September 2018.[^4] A system you are afraid to touch is also a system you are slow to patch.`,
+      },
+      {
+        kind: 'pullquote',
+        text: `A system you are afraid to touch is also a system you are slow to patch.`,
+      },
+      {
+        kind: 'h2',
+        text: `A simpler question`,
+      },
+      {
+        kind: 'p',
+        text: `The usual question — what will it cost to replace this? — is the wrong one, because it weighs a known number against a blank. The better question is what the system costs you to keep, counting the work it displaces and the risk it carries. Modernisation is rarely justified by a cheaper maintenance bill. It is justified by everything the maintenance bill is hiding.`,
+      },
+      {
+        kind: 'p',
+        text: `The real price of an old system is not what it costs to run. It is what it costs you to never change it.`,
+      },
+      {
+        kind: 'footnote',
+        text: `U.S. Government Accountability Office, "Information Technology: Agencies Need to Plan for Modernizing Critical Decades-Old Legacy Systems (GAO-25-107795)", 2025. https://files.gao.gov/reports/GAO-25-107795/index.html`,
+      },
+      {
+        kind: 'footnote',
+        text: `U.S. Government Accountability Office, "Information Technology: Federal Agencies Are Making Progress in Implementing GAO Recommendations (GAO-24-106693)", 2024. https://www.gao.gov/products/gao-24-106693`,
+      },
+      {
+        kind: 'footnote',
+        text: `U.S. Government Accountability Office, "Information Technology: Agencies Need to Develop and Implement Modernization Plans for Critical Legacy Systems (GAO-21-524T)", 2021. https://www.gao.gov/products/gao-21-524t`,
+      },
+      {
+        kind: 'footnote',
+        text: `U.S. Government Accountability Office, "Information Technology: Agencies Need to Develop Modernization Plans for Critical Legacy Systems (GAO-19-471)", 2019. https://www.gao.gov/products/gao-19-471`,
+      },
+    ],
+  },
+  {
     slug: 'brand-feel-inevitable',
     title: 'What makes a brand feel inevitable',
     tagline: 'On the difference between a brand that looks expensive and one that looks correct.',
