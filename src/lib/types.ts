@@ -22,7 +22,7 @@ export interface Project {
   next: string;
 }
 
-export type InsightSectionKind = 'p' | 'h2' | 'h3' | 'pullquote';
+export type InsightSectionKind = 'p' | 'h2' | 'h3' | 'pullquote' | 'footnote';
 
 export interface InsightSection {
   kind: InsightSectionKind;
