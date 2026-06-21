@@ -37,6 +37,11 @@ export const metadata: Metadata = {
   keywords: ['architecture', 'web development', 'digital marketing', 'Boulder Colorado', 'design studio'],
   authors: [{ name: 'The E2W Company' }],
   creator: 'The E2W Company',
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
