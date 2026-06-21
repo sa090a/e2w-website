@@ -38,9 +38,9 @@ export const metadata: Metadata = {
   authors: [{ name: 'The E2W Company' }],
   creator: 'The E2W Company',
   icons: {
-    icon: '/favicon.svg',
-    shortcut: '/favicon.svg',
-    apple: '/favicon.svg',
+    icon: '/e2w-logo.png',
+    shortcut: '/e2w-logo.png',
+    apple: '/e2w-logo.png',
   },
   openGraph: {
     type: 'website',

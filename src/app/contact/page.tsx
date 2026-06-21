@@ -68,8 +68,7 @@ export default function ContactPage() {
             <div className="contact-meta">
               <div className="row"><span className="k">Email</span><span className="v"><a href="mailto:hello@e2w.company">hello@e2w.company</a></span></div>
               <div className="row"><span className="k">New Business</span><span className="v"><a href="mailto:projects@e2w.company">projects@e2w.company</a></span></div>
-              <div className="row"><span className="k">US</span><span className="v"><a href="tel:+17193010359">+1 (719) 301-0359</a></span></div>
-              <div className="row"><span className="k">PK</span><span className="v"><a href="tel:+923476133664">+92 347 6133664</a></span></div>
+              <div className="row"><span className="k">US</span><span className="v"><a href="tel:+17207681606">+1 (720) 768-1606</a></span></div>
               <div className="row">
                 <span className="k">HQ Address</span>
                 <span className="v" style={{ lineHeight: 1.5 }}>
