@@ -229,8 +229,7 @@ export default function HomePage() {
                 {[
                   ['General','hello@e2w.company','mailto:hello@e2w.company'],
                   ['New Business','projects@e2w.company','mailto:projects@e2w.company'],
-                  ['US Phone','+1 (719) 301-0359','tel:+17193010359'],
-                  ['PK Phone','+92 347 6133664','tel:+923476133664'],
+                  ['US Phone','+1 (720) 768-1606','tel:+17207681606'],
                 ].map(([k,v,href]) => (
                   <div key={k} className="row">
                     <span className="k">{k}</span>

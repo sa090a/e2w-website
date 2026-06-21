@@ -9,7 +9,7 @@ const LOCATIONS = [
     cityEm: 'Colorado',
     role: 'Headquarters',
     addr: '1942 Broadway St., STE 314C\nBoulder, CO 80302, USA',
-    meta: 'GMT−7 · +1 (719) 301-0359',
+    meta: 'GMT−7 · +1 (720) 768-1606',
     x: 21, y: 38,
   },
   {
@@ -27,7 +27,7 @@ const LOCATIONS = [
     cityEm: 'Pakistan',
     role: 'Engineering Studio',
     addr: '4th Floor, Bunyad Plaza\n95 Bahria Paradise, Phase 4\nIslamabad, Pakistan',
-    meta: 'GMT+5 · +92 347 6133664',
+    meta: 'GMT+5 · Islamabad, Pakistan',
     x: 67, y: 41,
   },
 ];
