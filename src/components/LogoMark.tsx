@@ -45,7 +45,7 @@ export default function LogoMark({ className = '', size = 32 }: LogoMarkProps) {
         <path d="M 83.08 230.98 L 29.4 211.1 M 83.08 230.98 L 31.99 170.65 M 31.99 170.65 L 63.85 157.19 M 139.12 290.36 L 119.45 323.86 M 139.12 290.36 L 91.19 269.5" />
         <path d="M 189.79 93.16 L 167.9 41.59 M 189.79 93.16 L 223.74 19.49 M 223.74 19.49 L 246.37 42.03 M 164.41 168.77 L 124.2 168.3 M 164.41 168.77 L 150.4 124.78" />
       </g>
-      <g fill="none" stroke="currentColor" strokeWidth="2.4">
+      <g fill="white" stroke="currentColor" strokeWidth="2.4">
         <circle cx="396.96" cy="80.95" r="7.5" />
         <circle cx="429.02" cy="102.43" r="7.5" />
         <circle cx="426.39" cy="139.78" r="7.5" />
