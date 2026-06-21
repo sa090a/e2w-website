@@ -5,16 +5,30 @@ interface LogoMarkProps {
   size?: number;
 }
 
-// The E2W Company logo — rendered directly from the source PNG, unmodified.
 export default function LogoMark({ className = '', size = 32 }: LogoMarkProps) {
   return (
-    <Image
-      src="/e2w-logo.png"
-      alt="The E2W Company"
-      width={size}
-      height={Math.round((size * 1504) / 1469)}
+    <span
       className={className}
-      priority
-    />
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: '#ffffff',
+        borderRadius: 6,
+        padding: 2,
+        flexShrink: 0,
+        width: size,
+        height: size,
+      }}
+    >
+      <Image
+        src="/e2w-logo.png"
+        alt="The E2W Company"
+        width={size - 4}
+        height={size - 4}
+        priority
+        style={{ objectFit: 'contain' }}
+      />
+    </span>
   );
 }
